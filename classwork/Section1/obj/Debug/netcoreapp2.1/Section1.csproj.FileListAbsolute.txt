@@ -1,0 +1,22 @@
+C:\Users\william.sarawichitr\Desktop\itse-1430-master\classwork\Section1\Section1\bin\Debug\netcoreapp2.1\Section1.deps.json
+C:\Users\william.sarawichitr\Desktop\itse-1430-master\classwork\Section1\Section1\bin\Debug\netcoreapp2.1\Section1.runtimeconfig.json
+C:\Users\william.sarawichitr\Desktop\itse-1430-master\classwork\Section1\Section1\bin\Debug\netcoreapp2.1\Section1.runtimeconfig.dev.json
+C:\Users\william.sarawichitr\Desktop\itse-1430-master\classwork\Section1\Section1\bin\Debug\netcoreapp2.1\Section1.dll
+C:\Users\william.sarawichitr\Desktop\itse-1430-master\classwork\Section1\Section1\bin\Debug\netcoreapp2.1\Section1.pdb
+C:\Users\william.sarawichitr\Desktop\itse-1430-master\classwork\Section1\Section1\obj\Debug\netcoreapp2.1\Section1.csprojAssemblyReference.cache
+C:\Users\william.sarawichitr\Desktop\itse-1430-master\classwork\Section1\Section1\obj\Debug\netcoreapp2.1\Section1.csproj.CoreCompileInputs.cache
+C:\Users\william.sarawichitr\Desktop\itse-1430-master\classwork\Section1\Section1\obj\Debug\netcoreapp2.1\Section1.AssemblyInfoInputs.cache
+C:\Users\william.sarawichitr\Desktop\itse-1430-master\classwork\Section1\Section1\obj\Debug\netcoreapp2.1\Section1.AssemblyInfo.cs
+C:\Users\william.sarawichitr\Desktop\itse-1430-master\classwork\Section1\Section1\obj\Debug\netcoreapp2.1\Section1.dll
+C:\Users\william.sarawichitr\Desktop\itse-1430-master\classwork\Section1\Section1\obj\Debug\netcoreapp2.1\Section1.pdb
+C:\Users\william.sarawichitr\Desktop\itse-1430-master - Copy (2)\classwork\Section1\obj\Debug\netcoreapp2.1\Section1.csprojAssemblyReference.cache
+C:\Users\william.sarawichitr\Desktop\itse-1430-master - Copy (2)\classwork\Section1\obj\Debug\netcoreapp2.1\Section1.csproj.CoreCompileInputs.cache
+C:\Users\william.sarawichitr\Desktop\itse-1430-master - Copy (2)\classwork\Section1\obj\Debug\netcoreapp2.1\Section1.AssemblyInfoInputs.cache
+C:\Users\william.sarawichitr\Desktop\itse-1430-master - Copy (2)\classwork\Section1\obj\Debug\netcoreapp2.1\Section1.AssemblyInfo.cs
+C:\Users\william.sarawichitr\Desktop\itse-1430-master - Copy (2)\classwork\Section1\obj\Debug\netcoreapp2.1\Section1.dll
+C:\Users\william.sarawichitr\Desktop\itse-1430-master - Copy (2)\classwork\Section1\obj\Debug\netcoreapp2.1\Section1.pdb
+C:\Users\william.sarawichitr\Desktop\itse-1430-master - Copy (2)\classwork\Section1\bin\Debug\netcoreapp2.1\Section1.deps.json
+C:\Users\william.sarawichitr\Desktop\itse-1430-master - Copy (2)\classwork\Section1\bin\Debug\netcoreapp2.1\Section1.runtimeconfig.json
+C:\Users\william.sarawichitr\Desktop\itse-1430-master - Copy (2)\classwork\Section1\bin\Debug\netcoreapp2.1\Section1.runtimeconfig.dev.json
+C:\Users\william.sarawichitr\Desktop\itse-1430-master - Copy (2)\classwork\Section1\bin\Debug\netcoreapp2.1\Section1.dll
+C:\Users\william.sarawichitr\Desktop\itse-1430-master - Copy (2)\classwork\Section1\bin\Debug\netcoreapp2.1\Section1.pdb
