@@ -10,7 +10,7 @@ namespace Section1
     {
         static void Main ( string[] args )
         {
-            //PlayingWithVariables();                       
+            //PlayingWithVariables();  
             var done = false;
             do
             {
@@ -23,17 +23,43 @@ namespace Section1
             } while (!done);
         }
 
+        enum Command
+        {
+            Quit = 0,
+            Add = 1,
+            Display = 2,
+        }
+
+        static string title;
+        static int releaseYear;
+        static int runLength;
+        static string description;
+        static bool isClassic;
+
+        static void AddMovie ()
+        {
+            title = ReadString("Enter a title: ", true);
+
+            releaseYear = ReadInt32("Enter the release year (>= 0): ", 0, 2100);
+            runLength = ReadInt32("Enter the run length (>= 0): ", 0, 86400);
+
+            description = ReadString("Enter a description: ", false);
+            isClassic = ReadBoolean("Is this a classic movie?");
+        }
+
         private static void DisplayMovie ()
         {
             if (String.IsNullOrEmpty(title))
             {
-                Console.WriteLine("No movie");
+                Console.WriteLine("No movies");
                 return;
             };
 
             Console.WriteLine(title);
 
             Console.WriteLine(releaseYear);
+            //var temp = releaseYear.ToString();
+            //10.ToString(); "10"
 
             Console.WriteLine(runLength + " (min)");
 
@@ -41,14 +67,6 @@ namespace Section1
 
             if (!String.IsNullOrEmpty(description))
                 Console.WriteLine(description);
-
-        }
-
-        enum Command
-        {
-            Quit = 0,
-            Add = 1,
-            Display = 2,
         }
 
         private static Command DisplayMenu ()
@@ -71,23 +89,6 @@ namespace Section1
             } while (true);
         }
 
-        static string title;
-        static int releaseYear;
-        static int runLength;
-        static string description;
-        static bool isClassic;
-
-        static void AddMovie ()
-        {
-            string title = ReadString("Enter a title: ", true);
-
-            int releaseYear = ReadInt32("Enter the release year (>= 0): ", 0, 2100);
-            int runLength = ReadInt32("Enter the run length (>= 0): ", 0, 86400);
-
-            string description = ReadString("Enter a description: ", false);
-            bool isClassic = ReadBoolean("Is this a classic movie?");
-        }
-
         private static bool ReadBoolean ( string message )
         {
             Console.Write(message + " (Y/N)");
@@ -96,10 +97,11 @@ namespace Section1
             {
                 string value = Console.ReadLine();
 
-                //Chech for empty string
+                //Checking for empty string
                 // 1. if (value != "")
                 // 2. if (value != String.Empty)
-                // 3. if (value.Length == 0)
+                // 3. if (value != null && value.Length == 0)
+                // 4. Preferred - String.IsNullOrEmpty
                 if (!String.IsNullOrEmpty(value))
                 {
                     // Input validation
@@ -113,7 +115,7 @@ namespace Section1
                     //else if (value == "n")
                     //    return false;
 
-                    bool isYes = String.Compare(value, "Y", true) == 0 ? true : false;
+                    //bool isYes = String.Compare(value, "Y", true) == 0 ? true : false;
 
                     if (String.Compare(value, "Y", true) == 0)
                         return true;
@@ -124,7 +126,7 @@ namespace Section1
                     //if (firstChar == 'Y' || firstChar == 'y')
                     //    return true;
                     //else if (firstChar == 'N' || firstChar == 'n')
-                    //    return false;
+                    //    return false;                    
                     //switch (firstChar)
                     //{
                     //    #region Demo case
@@ -157,7 +159,7 @@ namespace Section1
                 //var x = 10;
                 string value = Console.ReadLine();
 
-                // if required and string is empty then error
+                //If required and string is empty then error
                 if (!String.IsNullOrEmpty(value) || !required)
                     return value;
 
@@ -173,7 +175,7 @@ namespace Section1
             do
             {
                 //string temp = Console.ReadLine();
-                string temp = Console.ReadLine();
+                var temp = Console.ReadLine();
                 //int value = Int32.Parse(temp);
 
                 //TODO: Clean this up
@@ -222,6 +224,43 @@ namespace Section1
             Console.WriteLine("Enter a value");
             string input = Console.ReadLine();
         }
+
+        static void PlayingWithStrings ()
+        {
+            var firstName = "Bob";
+            var lastName = "Jones";
+
+            var fullName = firstName + lastName;
+            fullName += " Jr";
+
+            //Concat more than 6
+            var concat = String.Concat(firstName, " ", lastName);
+            var joined = String.Join(" ", firstName, lastName);
+
+            //Formatting
+            Console.WriteLine("First Name: {0} Last Name: {1}", firstName, lastName);
+            var format = String.Format("First Name: {0} Last Name: {1}", firstName, lastName);
+            var format2 = "First Name: " + firstName + " Last Name: " + lastName;
+
+            //Preferred - string interpolation
+            var format3 = $"First Name: {firstName} Last Name: {lastName}";
+
+            //Verbatim string
+            var path = @"c:\windows\system32";
+
+            var startsWithSlash = path.StartsWith(@"\");
+            var endsWithSlash = path.EndsWith(@"\");
+
+            var padLeft = fullName.PadLeft(20);
+            var padRight = fullName.PadRight(20);
+            var header = "".PadLeft(20, '-'); //"-----"
+
+            var trim = fullName.Trim();
+            var trimStart = fullName.TrimStart();
+            var trimEnd = fullName.TrimEnd();
+            var trimSlash = path.Trim('\\','-');
+
+            var tokens = path.Split('\\');
+        }
     }
 }
-
