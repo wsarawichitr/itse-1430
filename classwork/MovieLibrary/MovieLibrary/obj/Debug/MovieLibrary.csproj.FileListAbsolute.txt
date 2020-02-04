@@ -1,0 +1,10 @@
+C:\Users\william.sarawichitr\source\repos\itse-1430\classwork\MovieLibrary\MovieLibrary\bin\Debug\MovieLibrary.exe.config
+C:\Users\william.sarawichitr\source\repos\itse-1430\classwork\MovieLibrary\MovieLibrary\bin\Debug\MovieLibrary.exe
+C:\Users\william.sarawichitr\source\repos\itse-1430\classwork\MovieLibrary\MovieLibrary\bin\Debug\MovieLibrary.pdb
+C:\Users\william.sarawichitr\source\repos\itse-1430\classwork\MovieLibrary\MovieLibrary\obj\Debug\MovieLibrary.csprojAssemblyReference.cache
+C:\Users\william.sarawichitr\source\repos\itse-1430\classwork\MovieLibrary\MovieLibrary\obj\Debug\MovieLibrary.Form1.resources
+C:\Users\william.sarawichitr\source\repos\itse-1430\classwork\MovieLibrary\MovieLibrary\obj\Debug\MovieLibrary.Properties.Resources.resources
+C:\Users\william.sarawichitr\source\repos\itse-1430\classwork\MovieLibrary\MovieLibrary\obj\Debug\MovieLibrary.csproj.GenerateResource.cache
+C:\Users\william.sarawichitr\source\repos\itse-1430\classwork\MovieLibrary\MovieLibrary\obj\Debug\MovieLibrary.csproj.CoreCompileInputs.cache
+C:\Users\william.sarawichitr\source\repos\itse-1430\classwork\MovieLibrary\MovieLibrary\obj\Debug\MovieLibrary.exe
+C:\Users\william.sarawichitr\source\repos\itse-1430\classwork\MovieLibrary\MovieLibrary\obj\Debug\MovieLibrary.pdb
