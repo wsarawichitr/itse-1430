@@ -1,0 +1,7 @@
+C:\Users\wsara\Desktop\itse-1430-master\labs\lab1\PizzaCreator\PizzaCreator\bin\Debug\PizzaCreator.exe.config
+C:\Users\wsara\Desktop\itse-1430-master\labs\lab1\PizzaCreator\PizzaCreator\bin\Debug\PizzaCreator.exe
+C:\Users\wsara\Desktop\itse-1430-master\labs\lab1\PizzaCreator\PizzaCreator\bin\Debug\PizzaCreator.pdb
+C:\Users\wsara\Desktop\itse-1430-master\labs\lab1\PizzaCreator\PizzaCreator\obj\Debug\PizzaCreator.csprojAssemblyReference.cache
+C:\Users\wsara\Desktop\itse-1430-master\labs\lab1\PizzaCreator\PizzaCreator\obj\Debug\PizzaCreator.csproj.CoreCompileInputs.cache
+C:\Users\wsara\Desktop\itse-1430-master\labs\lab1\PizzaCreator\PizzaCreator\obj\Debug\PizzaCreator.exe
+C:\Users\wsara\Desktop\itse-1430-master\labs\lab1\PizzaCreator\PizzaCreator\obj\Debug\PizzaCreator.pdb
