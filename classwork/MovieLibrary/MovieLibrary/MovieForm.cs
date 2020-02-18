@@ -13,23 +13,45 @@ namespace MovieLibrary.Winforms
 {
     public partial class MovieForm : Form
     {
+        #region Constructors
+
         public MovieForm ()
         {
             InitializeComponent();
         }
 
-        public Movie Movie
+        //Call the more specific constructor first - constructor chaining
+        public MovieForm ( Movie movie ) : this(movie != null ? "Edit" : "Add", movie)
         {
-            get { return _movie; }
-            set { _movie = value; }
+            //InitializeComponent();
+            //Movie = movie;
+
+            //Text = movie != null ? "Edit" : "Add";
         }
-        private Movie _movie;
+
+        public MovieForm ( string title, Movie movie ) : this()
+        {
+            Text = title;
+            Movie = movie;
+        }
+
+        //private void Initialize ( string title, Movie movie )
+        //{
+        //    InitializeComponent();
+        //    Text = title;
+        //    Movie = movie;
+        //}
+        #endregion
+
+        public Movie Movie { get; set; }
 
         private void OnCancel ( object sender, EventArgs e )
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
+
+        #region Event Handlers
 
         private void OnOK ( object sender, EventArgs e )
         {
@@ -45,6 +67,21 @@ namespace MovieLibrary.Winforms
             DialogResult = DialogResult.OK;
             Close();
         }
+        #endregion
+
+        protected override void OnLoad ( EventArgs e )
+        {
+            base.OnLoad(e);
+
+            if (Movie != null)
+            {
+                txtTitle.Text = Movie.Title;
+                txtDescription.Text = Movie.Description;
+                txtReleaseYear.Text = Movie.ReleaseYear.ToString();
+                txtRunLength.Text = Movie.RunLength.ToString();
+                chkIsClassic.Checked = Movie.IsClassic;
+            }
+        }
 
         private Movie GetMovie ()
         {
@@ -55,7 +92,7 @@ namespace MovieLibrary.Winforms
             movie.RunLength = GetAsInt32(txtRunLength);
             movie.ReleaseYear = GetAsInt32(txtReleaseYear);
             movie.Description = txtDescription.Text.Trim();
-            movie.isClassic = chkIsClassic.Checked;
+            movie.IsClassic = chkIsClassic.Checked;
 
             return movie;
         }
