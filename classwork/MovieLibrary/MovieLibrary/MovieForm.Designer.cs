@@ -39,6 +39,8 @@
             this.txtRunLength = new System.Windows.Forms.TextBox();
             this.txtReleaseYear = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
+            this.ddlGenres = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnOK
@@ -64,7 +66,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 13);
+            this.label1.Location = new System.Drawing.Point(32, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 2;
@@ -73,7 +75,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(56, 49);
+            this.label2.Location = new System.Drawing.Point(31, 82);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 13);
             this.label2.TabIndex = 3;
@@ -82,7 +84,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(60, 86);
+            this.label3.Location = new System.Drawing.Point(35, 119);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 4;
@@ -91,7 +93,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(59, 120);
+            this.label4.Location = new System.Drawing.Point(34, 153);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 13);
             this.label4.TabIndex = 5;
@@ -100,7 +102,7 @@
             // chkIsClassic
             // 
             this.chkIsClassic.AutoSize = true;
-            this.chkIsClassic.Location = new System.Drawing.Point(101, 204);
+            this.chkIsClassic.Location = new System.Drawing.Point(116, 223);
             this.chkIsClassic.Name = "chkIsClassic";
             this.chkIsClassic.Size = new System.Drawing.Size(70, 17);
             this.chkIsClassic.TabIndex = 6;
@@ -109,37 +111,56 @@
             // 
             // txtTitle
             // 
-            this.txtTitle.Location = new System.Drawing.Point(141, 13);
+            this.txtTitle.Location = new System.Drawing.Point(116, 46);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(100, 20);
             this.txtTitle.TabIndex = 7;
             // 
             // txtRunLength
             // 
-            this.txtRunLength.Location = new System.Drawing.Point(141, 49);
+            this.txtRunLength.Location = new System.Drawing.Point(116, 82);
             this.txtRunLength.Name = "txtRunLength";
             this.txtRunLength.Size = new System.Drawing.Size(100, 20);
             this.txtRunLength.TabIndex = 8;
             // 
             // txtReleaseYear
             // 
-            this.txtReleaseYear.Location = new System.Drawing.Point(141, 86);
+            this.txtReleaseYear.Location = new System.Drawing.Point(116, 119);
             this.txtReleaseYear.Name = "txtReleaseYear";
             this.txtReleaseYear.Size = new System.Drawing.Size(100, 20);
             this.txtReleaseYear.TabIndex = 9;
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(141, 120);
+            this.txtDescription.Location = new System.Drawing.Point(116, 153);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(100, 20);
             this.txtDescription.TabIndex = 10;
+            // 
+            // ddlGenres
+            // 
+            this.ddlGenres.FormattingEnabled = true;
+            this.ddlGenres.Location = new System.Drawing.Point(116, 260);
+            this.ddlGenres.Name = "ddlGenres";
+            this.ddlGenres.Size = new System.Drawing.Size(121, 21);
+            this.ddlGenres.TabIndex = 11;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(35, 263);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(36, 13);
+            this.label5.TabIndex = 12;
+            this.label5.Text = "Genre";
             // 
             // MovieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.ddlGenres);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.txtReleaseYear);
             this.Controls.Add(this.txtRunLength);
@@ -175,5 +196,7 @@
         private System.Windows.Forms.TextBox txtRunLength;
         private System.Windows.Forms.TextBox txtReleaseYear;
         private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.ComboBox ddlGenres;
+        private System.Windows.Forms.Label label5;
     }
 }

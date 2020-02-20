@@ -15,7 +15,7 @@ namespace MovieLibrary.Winforms
     {
         #region Constructors
 
-        public MovieForm ()
+        public MovieForm () //: base()
         {
             InitializeComponent();
         }
@@ -45,13 +45,13 @@ namespace MovieLibrary.Winforms
 
         public Movie Movie { get; set; }
 
+        #region Event Handlers
+
         private void OnCancel ( object sender, EventArgs e )
         {
             DialogResult = DialogResult.Cancel;
             Close();
         }
-
-        #region Event Handlers
 
         private void OnOK ( object sender, EventArgs e )
         {
@@ -73,6 +73,10 @@ namespace MovieLibrary.Winforms
         {
             base.OnLoad(e);
 
+            //Populate combo
+            var genres = Genres.GetAll();
+            ddlGenres.Items.AddRange(genres);
+
             if (Movie != null)
             {
                 txtTitle.Text = Movie.Title;
@@ -80,6 +84,9 @@ namespace MovieLibrary.Winforms
                 txtReleaseYear.Text = Movie.ReleaseYear.ToString();
                 txtRunLength.Text = Movie.RunLength.ToString();
                 chkIsClassic.Checked = Movie.IsClassic;
+
+                if (Movie.Genre != null)
+                    ddlGenres.SelectedText = Movie.Genre.Description;
             }
         }
 
@@ -93,6 +100,22 @@ namespace MovieLibrary.Winforms
             movie.ReleaseYear = GetAsInt32(txtReleaseYear);
             movie.Description = txtDescription.Text.Trim();
             movie.IsClassic = chkIsClassic.Checked;
+
+            //movie.Genre = (Genre)ddlGenres.SelectedItem; //C-style, crashes if wrong
+
+            //Preferred - as operator
+            //var genre = ddlGenres.SelectedItem as Genre; 
+            //if (genre != null)
+            //    movie.Genre = genre;
+
+            //Equivalent of as
+            //if (ddlGenres.SelectedItem is Genre)
+            //    genre = (Genre)ddlGenres.SelectedItem;
+
+            //Pattern match
+            if (ddlGenres.SelectedItem is Genre genre)
+                movie.Genre = genre;
+            //movie.Genre = ddlGenres.SelectedItem;
 
             return movie;
         }
