@@ -17,6 +17,7 @@ namespace MovieLibrary.Business
         /// <summary>Gets or sets the title.</summary>
         public string Title
         {
+            //
             get 
             {
                 ////long, long way
