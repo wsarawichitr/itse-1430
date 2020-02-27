@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent ()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,6 +42,8 @@
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.ddlGenres = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this._errors = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this._errors)).BeginInit();
             this.SuspendLayout();
             // 
             // btnOK
@@ -57,6 +60,7 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.CausesValidation = false;
             this.btnCancel.Location = new System.Drawing.Point(307, 328);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
@@ -120,6 +124,7 @@
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(253, 20);
             this.txtTitle.TabIndex = 0;
+            this.txtTitle.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateTitle);
             // 
             // txtRunLength
             // 
@@ -127,6 +132,7 @@
             this.txtRunLength.Name = "txtRunLength";
             this.txtRunLength.Size = new System.Drawing.Size(49, 20);
             this.txtRunLength.TabIndex = 1;
+            this.txtRunLength.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateRunLength);
             // 
             // txtReleaseYear
             // 
@@ -134,6 +140,7 @@
             this.txtReleaseYear.Name = "txtReleaseYear";
             this.txtReleaseYear.Size = new System.Drawing.Size(49, 20);
             this.txtReleaseYear.TabIndex = 2;
+            this.txtReleaseYear.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateReleaseYear);
             // 
             // txtDescription
             // 
@@ -165,10 +172,16 @@
             this.label5.TabIndex = 12;
             this.label5.Text = "Genre";
             // 
+            // _errors
+            // 
+            this._errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this._errors.ContainerControl = this;
+            // 
             // MovieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(410, 373);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.ddlGenres);
@@ -190,6 +203,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Movie Details";
+            ((System.ComponentModel.ISupportInitialize)(this._errors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,5 +224,6 @@
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.ComboBox ddlGenres;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ErrorProvider _errors;
     }
 }
