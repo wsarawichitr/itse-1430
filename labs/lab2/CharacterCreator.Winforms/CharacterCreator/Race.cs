@@ -26,11 +26,11 @@ namespace CharacterCreator
         public static Race[] GetAll ()
         {
             var items = new Race[5];
-            items[0] = new Race("Fighter");
-            items[1] = new Race("Hunter");
-            items[2] = new Race("Priest");
-            items[3] = new Race("Rogue");
-            items[4] = new Race("Wizard");
+            items[0] = new Race("Dwarf");
+            items[1] = new Race("Elf");
+            items[2] = new Race("Gnome");
+            items[3] = new Race("Half Elf");
+            items[4] = new Race("Human");
 
             return items;
         }

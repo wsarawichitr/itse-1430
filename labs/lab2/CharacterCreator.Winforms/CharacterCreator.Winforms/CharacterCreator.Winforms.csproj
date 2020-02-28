@@ -97,5 +97,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CharacterCreator\CharacterCreator.Business.csproj">
+      <Project>{69e0f888-893e-4b0d-be3e-a85c108866b3}</Project>
+      <Name>CharacterCreator.Business</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
