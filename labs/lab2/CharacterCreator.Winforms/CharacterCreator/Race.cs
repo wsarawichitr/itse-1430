@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CharacterCreator
+{
+    public class Race
+    {
+        public Race ( string description )
+        {
+            Description = description ?? "";
+        }
+
+        public string Description { get; }
+
+        public override string ToString ()
+        {
+            return Description;
+        }
+    }
+
+    public class Races
+    {
+        public static Race[] GetAll ()
+        {
+            var items = new Race[5];
+            items[0] = new Race("Fighter");
+            items[1] = new Race("Hunter");
+            items[2] = new Race("Priest");
+            items[3] = new Race("Rogue");
+            items[4] = new Race("Wizard");
+
+            return items;
+        }
+    }
+}

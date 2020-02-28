@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace CharacterCreator.Winforms
 {
-    public partial class Form1 : Form
+    public partial class CharacterForm : Form
     {
-        public Form1 ()
+        public CharacterForm ()
         {
             InitializeComponent();
+        }
+
+        private void CharacterForm_Load ( object sender, EventArgs e )
+        {
+
         }
     }
 }
