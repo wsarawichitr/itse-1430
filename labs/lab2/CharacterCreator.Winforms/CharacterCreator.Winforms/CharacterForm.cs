@@ -23,20 +23,8 @@ namespace CharacterCreator.Winforms
         }
 
         public Character Character { get; set; }
-
-        private void OnValidateName ( object sender, CancelEventArgs e )
-        {
-            var control = sender as TextBox;
-
-            if (String.IsNullOrEmpty(control.Text))
-            {
-                _errors.SetError(control, "Name is required");
-                e.Cancel = true;
-            } else
-                _errors.SetError(control, "");
-        }
-
-        private void OnOK ( object sender, EventArgs e )
+        
+        private void OnSave ( object sender, EventArgs e )
         {
             DialogResult = DialogResult.OK;
             Close();
@@ -60,19 +48,78 @@ namespace CharacterCreator.Winforms
 
 
 
-            //if (Movie != null)
-            //{
-            //    txtTitle.Text = Movie.Title;
-            //    txtDescription.Text = Movie.Description;
-            //    txtReleaseYear.Text = Movie.ReleaseYear.ToString();
-            //    txtRunLength.Text = Movie.RunLength.ToString();
-            //    chkIsClassic.Checked = Movie.IsClassic;
+            if (Character != null)
+            {
+                txtName.Text = Character.Name ?? "";
 
-            //    if (Movie.Genre != null)
-            //        ddlGenres.SelectedText = Movie.Genre.Description;
+                txtStrength.Text = Character.Attribute[0].ToString();
+                txtIntelligence.Text = Character.Attribute[1].ToString();
+                txtAgility.Text = Character.Attribute[2].ToString();
+                txtConstitution.Text = Character.Attribute[3].ToString();
+                txtCharisma.Text = Character.Attribute[4].ToString();
 
-            //    ValidateChildren();
-            //};
+                txtDescription.Text = Character.Description;
+
+                if (Character.Profession != null)
+                    ddlProfessions.SelectedText = Character.Profession.Description;
+                if (Character.Race != null)
+                    ddlRaces.SelectedText = Character.Race.Description;
+
+                ValidateChildren();
+            };
+        }
+
+        private Character GetCharacter ()
+        {
+            var character = new Character();
+
+            character.Name = txtName.Text?.Trim();
+
+            if (ddlProfessions.SelectedItem is Profession profession)
+                character.Profession = profession;
+
+            if (ddlRaces.SelectedItem is Race race)
+                character.Race = race;
+
+            character.Attribute[0] = GetAsInt32(txtStrength);
+            character.Attribute[1] = GetAsInt32(txtIntelligence);
+            character.Attribute[2] = GetAsInt32(txtAgility);
+            character.Attribute[3] = GetAsInt32(txtConstitution);
+            character.Attribute[4] = GetAsInt32(txtCharisma);
+
+            character.Description = txtDescription.Text.Trim();
+
+
+
+            return character;
+        }
+
+        private int GetAsInt32 ( Control control )
+        {
+            return GetAsInt32(control, 0);
+        }
+
+        private int GetAsInt32 ( Control control, int emptyValue )
+        {
+            if (String.IsNullOrEmpty(control.Text))
+                return emptyValue;
+
+            if (Int32.TryParse(control.Text, out var result))
+                return result;
+
+            return -1;
+        }
+
+        private void OnValidateName ( object sender, CancelEventArgs e )
+        {
+            var control = sender as TextBox;
+
+            if (String.IsNullOrEmpty(control.Text))
+            {
+                _errors.SetError(control, "Name is required");
+                e.Cancel = true;
+            } else
+                _errors.SetError(control, "");
         }
     }
 }
