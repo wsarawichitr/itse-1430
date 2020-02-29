@@ -68,9 +68,15 @@ namespace CharacterCreator.Winforms
                 txtDescription.Text = Character.Description;
 
                 if (Character.Profession != null)
-                    ddlProfessions.SelectedText = Character.Profession.Description;
+                {
+                    //ddlProfessions.SelectedText = Character.Profession.Description;
+                    ddlProfessions.SelectedIndex = Character.Profession.Index;
+                }
                 if (Character.Race != null)
-                    ddlRaces.SelectedText = Character.Race.Description;
+                {
+                    //ddlRaces.SelectedText = Character.Race.Description;
+                    ddlRaces.SelectedIndex = Character.Race.Index;
+                }
 
                 ValidateChildren();
             };
@@ -83,10 +89,16 @@ namespace CharacterCreator.Winforms
             character.Name = txtName.Text?.Trim();
 
             if (ddlProfessions.SelectedItem is Profession profession)
+            {
                 character.Profession = profession;
+                character.Profession.Index = ddlProfessions.SelectedIndex;
+            }
 
             if (ddlRaces.SelectedItem is Race race)
+            {
                 character.Race = race;
+                character.Race.Index = ddlRaces.SelectedIndex;
+            }
 
             character.Attribute[0] = GetAsInt32(txtStrength);
             character.Attribute[1] = GetAsInt32(txtIntelligence);
@@ -124,6 +136,18 @@ namespace CharacterCreator.Winforms
             if (String.IsNullOrEmpty(control.Text))
             {
                 _errors.SetError(control, "Name is required");
+                e.Cancel = true;
+            } else
+                _errors.SetError(control, "");
+        }
+
+        private void OnValidateProfession ( object sender, CancelEventArgs e )
+        {
+            var control = sender as ComboBox;
+
+            if (ddlProfessions==null)
+            {
+                _errors.SetError(control, "Profession is required");
                 e.Cancel = true;
             } else
                 _errors.SetError(control, "");

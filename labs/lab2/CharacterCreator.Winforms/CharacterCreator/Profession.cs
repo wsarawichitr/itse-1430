@@ -22,6 +22,9 @@ namespace CharacterCreator
         {
             return Description;
         }
+
+        public int Index { get; set; }
+
     }
 
     public class Professions
