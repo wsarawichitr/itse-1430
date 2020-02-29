@@ -1,4 +1,7 @@
-﻿using System;
+﻿//William Sarawichitr
+//ITSE-1430
+//2-26-20
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,6 +32,11 @@ namespace CharacterCreator.Winforms
                 return;
         }
 
+        private void OnCharacterEdit ( object sender, EventArgs e )
+        {
+            
+        }
+
         private void OnHelpAbout ( object sender, EventArgs e )
         {
             var about = new AboutBox();
@@ -36,6 +44,5 @@ namespace CharacterCreator.Winforms
             about.ShowDialog(this);
         }
 
-        
     }
 }

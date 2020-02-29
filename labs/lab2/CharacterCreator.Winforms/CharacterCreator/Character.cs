@@ -1,4 +1,7 @@
-﻿using System;
+﻿//William Sarawichitr
+//ITSE-1430
+//2-26-20
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +26,12 @@ namespace CharacterCreator
 
         public Race Race { get; set; }
 
-        public int[] Attribute { get; set; } = { 50, 50, 50, 50, 50 };
+        public int[] Attribute
+        {
+            get { return _attribute; }
+            set { _attribute = value; }
+        }
+        private int[] _attribute = { 50, 50, 50, 50, 50 };
 
         public string Description { get; set; }
 

@@ -1,4 +1,7 @@
-﻿using System;
+﻿//William Sarawichitr
+//ITSE-1430
+//2-26-20
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,6 +29,9 @@ namespace CharacterCreator.Winforms
         
         private void OnSave ( object sender, EventArgs e )
         {
+            if (!ValidateChildren())
+                return;
+
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -46,11 +52,17 @@ namespace CharacterCreator.Winforms
             var races = Races.GetAll();
             ddlRaces.Items.AddRange(races);
 
-
+            txtStrength.Text = "50";
+            txtIntelligence.Text = "50";
+            txtAgility.Text = "50";
+            txtConstitution.Text = "50";
+            txtCharisma.Text = "50";
 
             if (Character != null)
             {
                 txtName.Text = Character.Name ?? "";
+
+                ddlProfessions.SelectedText = Character.Profession.Description;
 
                 txtStrength.Text = Character.Attribute[0].ToString();
                 txtIntelligence.Text = Character.Attribute[1].ToString();
@@ -117,6 +129,18 @@ namespace CharacterCreator.Winforms
             if (String.IsNullOrEmpty(control.Text))
             {
                 _errors.SetError(control, "Name is required");
+                e.Cancel = true;
+            } else
+                _errors.SetError(control, "");
+        }
+
+        private void OnValidateAttribute ( object sender, CancelEventArgs e )
+        {
+            var control = sender as Control;
+            var value = GetAsInt32(control, 50);
+            if (value < 1 || value > 100)
+            {
+                _errors.SetError(control, "Attributes must be from 1-100");
                 e.Cancel = true;
             } else
                 _errors.SetError(control, "");

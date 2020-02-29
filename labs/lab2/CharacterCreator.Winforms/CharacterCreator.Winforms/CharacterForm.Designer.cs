@@ -84,7 +84,8 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(80, 133);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(37, 136);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 17);
             this.label4.TabIndex = 3;
@@ -150,7 +151,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtName.Location = new System.Drawing.Point(111, 28);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(199, 22);
+            this.txtName.Size = new System.Drawing.Size(261, 22);
             this.txtName.TabIndex = 10;
             this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateName);
             // 
@@ -159,7 +160,7 @@
             this.ddlProfessions.FormattingEnabled = true;
             this.ddlProfessions.Location = new System.Drawing.Point(111, 57);
             this.ddlProfessions.Name = "ddlProfessions";
-            this.ddlProfessions.Size = new System.Drawing.Size(121, 24);
+            this.ddlProfessions.Size = new System.Drawing.Size(77, 24);
             this.ddlProfessions.TabIndex = 11;
             // 
             // ddlRaces
@@ -167,43 +168,48 @@
             this.ddlRaces.FormattingEnabled = true;
             this.ddlRaces.Location = new System.Drawing.Point(111, 87);
             this.ddlRaces.Name = "ddlRaces";
-            this.ddlRaces.Size = new System.Drawing.Size(121, 24);
+            this.ddlRaces.Size = new System.Drawing.Size(77, 24);
             this.ddlRaces.TabIndex = 12;
             // 
             // txtStrength
             // 
             this.txtStrength.Location = new System.Drawing.Point(111, 164);
             this.txtStrength.Name = "txtStrength";
-            this.txtStrength.Size = new System.Drawing.Size(37, 22);
+            this.txtStrength.Size = new System.Drawing.Size(34, 22);
             this.txtStrength.TabIndex = 13;
+            this.txtStrength.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateAttribute);
             // 
             // txtIntelligence
             // 
             this.txtIntelligence.Location = new System.Drawing.Point(111, 192);
             this.txtIntelligence.Name = "txtIntelligence";
-            this.txtIntelligence.Size = new System.Drawing.Size(37, 22);
+            this.txtIntelligence.Size = new System.Drawing.Size(34, 22);
             this.txtIntelligence.TabIndex = 14;
+            this.txtIntelligence.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateAttribute);
             // 
             // txtAgility
             // 
             this.txtAgility.Location = new System.Drawing.Point(111, 221);
             this.txtAgility.Name = "txtAgility";
-            this.txtAgility.Size = new System.Drawing.Size(37, 22);
+            this.txtAgility.Size = new System.Drawing.Size(34, 22);
             this.txtAgility.TabIndex = 15;
+            this.txtAgility.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateAttribute);
             // 
             // txtConstitution
             // 
             this.txtConstitution.Location = new System.Drawing.Point(111, 250);
             this.txtConstitution.Name = "txtConstitution";
-            this.txtConstitution.Size = new System.Drawing.Size(37, 22);
+            this.txtConstitution.Size = new System.Drawing.Size(34, 22);
             this.txtConstitution.TabIndex = 16;
+            this.txtConstitution.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateAttribute);
             // 
             // txtCharisma
             // 
             this.txtCharisma.Location = new System.Drawing.Point(111, 279);
             this.txtCharisma.Name = "txtCharisma";
-            this.txtCharisma.Size = new System.Drawing.Size(37, 22);
+            this.txtCharisma.Size = new System.Drawing.Size(34, 22);
             this.txtCharisma.TabIndex = 17;
+            this.txtCharisma.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateAttribute);
             // 
             // txtDescription
             // 
