@@ -27,14 +27,25 @@ namespace CharacterCreator.Winforms
 
         private void OnCharacterAdd ( object sender, EventArgs e )
         {
-            CharacterForm character = new CharacterForm();
-            if (character.ShowDialog(this) != DialogResult.OK)
+            var child = new CharacterForm();
+            if (child.ShowDialog(this) != DialogResult.OK)
                 return;
+
+            //Save character
+            _character = child.Character;
         }
 
         private void OnCharacterEdit ( object sender, EventArgs e )
         {
-            
+            var character = _character;
+            //if (character == null)
+            //    return;
+
+            var child = new CharacterForm();
+            child.Character = character;
+            child.Text = "Edit Character";
+            if (child.ShowDialog(this) != DialogResult.OK)
+                return;
         }
 
         private void OnHelpAbout ( object sender, EventArgs e )
@@ -44,5 +55,6 @@ namespace CharacterCreator.Winforms
             about.ShowDialog(this);
         }
 
+        private Character _character;
     }
 }

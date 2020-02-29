@@ -35,5 +35,6 @@ namespace CharacterCreator
 
         public string Description { get; set; }
 
+
     }
 }

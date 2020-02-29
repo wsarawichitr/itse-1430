@@ -20,18 +20,15 @@ namespace CharacterCreator.Winforms
             InitializeComponent();
         }
 
-        private void CharacterForm_Load ( object sender, EventArgs e )
-        {
-
-        }
-
         public Character Character { get; set; }
         
         private void OnSave ( object sender, EventArgs e )
         {
             if (!ValidateChildren())
                 return;
+            var character = GetCharacter();
 
+            Character = character;
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -51,7 +48,7 @@ namespace CharacterCreator.Winforms
             ddlProfessions.Items.AddRange(professions);
             var races = Races.GetAll();
             ddlRaces.Items.AddRange(races);
-
+            
             txtStrength.Text = "50";
             txtIntelligence.Text = "50";
             txtAgility.Text = "50";
@@ -61,8 +58,6 @@ namespace CharacterCreator.Winforms
             if (Character != null)
             {
                 txtName.Text = Character.Name ?? "";
-
-                ddlProfessions.SelectedText = Character.Profession.Description;
 
                 txtStrength.Text = Character.Attribute[0].ToString();
                 txtIntelligence.Text = Character.Attribute[1].ToString();
@@ -144,6 +139,14 @@ namespace CharacterCreator.Winforms
                 e.Cancel = true;
             } else
                 _errors.SetError(control, "");
+        }
+
+
+
+
+        private void CharacterForm_Load ( object sender, EventArgs e )
+        {
+
         }
     }
 }
