@@ -162,6 +162,7 @@
             this.ddlProfessions.Name = "ddlProfessions";
             this.ddlProfessions.Size = new System.Drawing.Size(77, 24);
             this.ddlProfessions.TabIndex = 11;
+            this.ddlProfessions.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateProfession);
             // 
             // ddlRaces
             // 
@@ -170,6 +171,7 @@
             this.ddlRaces.Name = "ddlRaces";
             this.ddlRaces.Size = new System.Drawing.Size(77, 24);
             this.ddlRaces.TabIndex = 12;
+            this.ddlRaces.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateRace);
             // 
             // txtStrength
             // 

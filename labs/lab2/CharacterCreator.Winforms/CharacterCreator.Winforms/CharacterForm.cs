@@ -145,9 +145,21 @@ namespace CharacterCreator.Winforms
         {
             var control = sender as ComboBox;
 
-            if (ddlProfessions==null)
+            if ( ddlProfessions.SelectedIndex == -1 )
             {
                 _errors.SetError(control, "Profession is required");
+                e.Cancel = true;
+            } else
+                _errors.SetError(control, "");
+        }
+
+        private void OnValidateRace ( object sender, CancelEventArgs e )
+        {
+            var control = sender as ComboBox;
+
+            if (ddlRaces.SelectedIndex == -1)
+            {
+                _errors.SetError(control, "Race is required");
                 e.Cancel = true;
             } else
                 _errors.SetError(control, "");
