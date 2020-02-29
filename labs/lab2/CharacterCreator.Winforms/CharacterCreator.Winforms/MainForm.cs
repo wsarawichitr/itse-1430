@@ -20,6 +20,15 @@ namespace CharacterCreator.Winforms
             InitializeComponent();
         }
 
+        private bool DisplayConfirmation ( string message, string title )
+        {
+            //Display a confirmation dialog
+            var result = MessageBox.Show(message, title, MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            //Return true if user selected OK
+            return result == DialogResult.OK;
+        }
+
         private void OnFileExit ( object sender, EventArgs e )
         {
             Close();
@@ -27,6 +36,12 @@ namespace CharacterCreator.Winforms
 
         private void OnCharacterAdd ( object sender, EventArgs e )
         {
+            if (_character != null)
+            {
+                if (!DisplayConfirmation("Overwrite existing character?", ""))
+                    return;
+            }
+
             var child = new CharacterForm();
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
@@ -38,14 +53,29 @@ namespace CharacterCreator.Winforms
         private void OnCharacterEdit ( object sender, EventArgs e )
         {
             var character = _character;
-            //if (character == null)
-            //    return;
+            if (character == null)
+                return;
 
             var child = new CharacterForm();
             child.Character = character;
             child.Text = "Edit Character";
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
+
+            //Save edit
+            _character = child.Character;
+        }
+
+        private void OnCharacterDelete ( object sender, EventArgs e )
+        {
+            var character = _character;
+            if (character == null)
+                return;
+
+            if (!DisplayConfirmation($"Are you sure you want to delete {character.Name}?", "Delete"))
+                return;
+            _character = null;
+
         }
 
         private void OnHelpAbout ( object sender, EventArgs e )
@@ -56,5 +86,7 @@ namespace CharacterCreator.Winforms
         }
 
         private Character _character;
+
+        
     }
 }
