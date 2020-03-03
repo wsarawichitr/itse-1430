@@ -83,7 +83,7 @@ namespace MovieLibrary.Business
         //    private set { _id = value; }
         //}
         //private int _id;
-        public int Id { get; }
+        public int Id { get; set; }
 
         public override string ToString ()
         {
