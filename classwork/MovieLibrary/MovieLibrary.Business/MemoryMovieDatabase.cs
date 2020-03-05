@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace MovieLibrary.Business
 {
-    public class MovieDatabase
+
+    public class MemoryMovieDatabase : IMovieDatabase
     {
         public Movie Add ( Movie movie )
         {
@@ -58,6 +59,19 @@ namespace MovieLibrary.Business
             //};
         }
 
+        public Movie Get ( int id )
+        {
+            //TODO: Error
+            if (id <= 0)
+                return null;
+
+            var movie = FindById(id);
+            if (movie == null)
+                return null;
+
+            return CloneMovie(movie);
+        }
+
         public Movie[] GetAll ()
         {
             //TODO: Clone objects
@@ -75,30 +89,47 @@ namespace MovieLibrary.Business
         //TODO: Movie names must be unique
         //TODO: Clone movie to store
         //TODO: Shouldn't need original movie
-        public void Update ( int id, Movie newMovie )
+        public string Update ( int id, Movie movie )
         {
-            for (var index = 0; index < _movies.Length; ++index)
-            {
-                if (_movies[index]?.Id == id)
-                {
-                    _movies[index] = newMovie;
-                    break;
-                };
-            };
+            //TODO: Validate
+            if (movie == null)
+                return "Movie is null";
+            if (!movie.Validate(out var error))
+                return error;
+            if (id <= 0)
+                return "Id is invalid";
+
+            var existing = FindById(id);
+            if (existing == null)
+                return "Movie not found";
+
+            // Movie names must be unique
+            var sameName = FindByTitle(movie.Title);
+            if (sameName != null && sameName.Id != id)
+                return "Movie must be unique";
+
+            //Update
+            CopyMovie(existing, movie, false);
+
+            return null;
         }
 
-        private Movie CloneMovie (Movie movie)
+        private Movie CloneMovie ( Movie movie )
         {
+            var item = new Movie();
+            CopyMovie(item, movie, true);
+
+            return item;
             //Object initializer syntax
-            return new Movie() {
-                Id = movie.Id,
-                Title = movie.Title,
-                Description = movie.Description,
-                Genre = new Genre(movie.Genre.Description),
-                IsClassic = movie.IsClassic,
-                ReleaseYear = movie.ReleaseYear,
-                RunLength = movie.RunLength,
-            };
+            //return new Movie() {
+            //    Id = movie.Id,
+            //    Title = movie.Title,
+            //    Description = movie.Description,
+            //    Genre = new Genre(movie.Genre.Description),
+            //    IsClassic = movie.IsClassic,
+            //    ReleaseYear = movie.ReleaseYear,
+            //    RunLength = movie.RunLength,
+            //};
             //item.Id = movie.Id;
             //item.Title = movie.Title;
             //item.Description = movie.Description;
@@ -108,6 +139,22 @@ namespace MovieLibrary.Business
             //item.RunLength = movie.RunLength;
 
             //return item;
+        }
+
+        private void CopyMovie ( Movie target, Movie source, bool includeId )
+        {
+            if (includeId)
+                target.Id = source.Id;
+            target.Id = source.Id;
+            target.Title = source.Title;
+            target.Description = source.Description;
+            if (source.Genre != null)
+                target.Genre = new Genre(source.Genre.Description);
+            else
+                target.Genre = null;
+            target.IsClassic = source.IsClassic;
+            target.ReleaseYear = source.ReleaseYear;
+            target.RunLength = source.RunLength;
         }
 
         private Movie FindByTitle ( string title )
