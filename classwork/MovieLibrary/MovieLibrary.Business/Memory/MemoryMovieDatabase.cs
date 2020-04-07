@@ -1,27 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace MovieLibrary.Business
+namespace MovieLibrary.Business.Memory
 {
 
-    public class MemoryMovieDatabase : IMovieDatabase
+    // Is-a relationship
+    public class MemoryMovieDatabase : MovieDatabase
     {
-        public Movie Add ( Movie movie )
+        protected override Movie AddCore ( Movie movie )
         {
-            //TODO: Validate
-            if (movie == null)
-                return null;
-            if (!movie.Validate(out var error))
-                return null;
-
-            //TODO: Movie names must be unique
-            var existing = FindByTitle(movie.Title);
-            if (existing != null)
-                return null;
-
             //TODO: Clone movie to store
             var item = CloneMovie(movie);
             item.Id = _id++;
@@ -40,12 +28,8 @@ namespace MovieLibrary.Business
             return CloneMovie(item);
         }
 
-        public void Delete ( int id )
+        protected override void DeleteCore ( int id )
         {
-            //TODO: Validate
-            if (id<=0)
-                return;
-
             var movie = FindById(id);
             if (movie != null)
                 _movies.Remove(movie);
@@ -59,12 +43,8 @@ namespace MovieLibrary.Business
             //};
         }
 
-        public Movie Get ( int id )
+        protected override Movie GetCore ( int id )
         {
-            //TODO: Error
-            if (id <= 0)
-                return null;
-
             var movie = FindById(id);
             if (movie == null)
                 return null;
@@ -72,46 +52,41 @@ namespace MovieLibrary.Business
             return CloneMovie(movie);
         }
 
-        public Movie[] GetAll ()
+        protected override IEnumerable<Movie> GetAllCore ()
         {
+            //return _movies;
             //TODO: Clone objects
-            var items = new Movie[_movies.Count];
-            var index = 0;
+            //var items = new Movie[_movies.Count];
+            //var index = 0;
+            //foreach (var movie in _movies)
+            //{
+            //    items[index++] = CloneMovie(movie);
+            //};
+
+            //return items;
+
+            //use an iterator Luke
             foreach (var movie in _movies)
             {
-                items[index++] = CloneMovie(movie);
+                yield return CloneMovie(movie);
             };
-
-            return items;
         }
+
+        //private sealed class Enumerator<T>  : IEnumerator<T>
+        //{
+        //    ...
+        //}
 
         //TODO: Validate
         //TODO: Movie names must be unique
         //TODO: Clone movie to store
         //TODO: Shouldn't need original movie
-        public string Update ( int id, Movie movie )
+        protected override void UpdateCore ( int id, Movie movie )
         {
-            //TODO: Validate
-            if (movie == null)
-                return "Movie is null";
-            if (!movie.Validate(out var error))
-                return error;
-            if (id <= 0)
-                return "Id is invalid";
-
             var existing = FindById(id);
-            if (existing == null)
-                return "Movie not found";
-
-            // Movie names must be unique
-            var sameName = FindByTitle(movie.Title);
-            if (sameName != null && sameName.Id != id)
-                return "Movie must be unique";
-
+            
             //Update
             CopyMovie(existing, movie, false);
-
-            return null;
         }
 
         private Movie CloneMovie ( Movie movie )
@@ -157,7 +132,7 @@ namespace MovieLibrary.Business
             target.RunLength = source.RunLength;
         }
 
-        private Movie FindByTitle ( string title )
+        protected override Movie FindByTitle ( string title )
         {
             foreach (var movie in _movies)
             {
@@ -168,7 +143,7 @@ namespace MovieLibrary.Business
             return null;
         }
 
-        private Movie FindById ( int id )
+        protected override Movie FindById ( int id )
         {
             foreach (var movie in _movies)
             {

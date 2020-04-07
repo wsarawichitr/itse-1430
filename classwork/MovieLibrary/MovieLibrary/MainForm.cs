@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
+using System.Linq;    //Language Intergrated Natural Query
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MovieLibrary.Business;
+using MovieLibrary.Business.Memory;
 using MovieLibrary.Winforms;
 
 namespace MovieLibrary
@@ -39,6 +40,18 @@ namespace MovieLibrary
             #endregion
         }
         #endregion
+
+        protected override void OnLoad ( EventArgs e )
+        {
+            base.OnLoad(e);
+            
+            //Call extension method as through it is an instance
+            //Discover it
+            _movies.SeedIfEmpty();
+            //SeedDatabase.SeedIfEmpty(_movies); //Compiles to this
+
+            UpdateUI();
+        }
 
         private bool DisplayConfirmation ( string message, string title )
         {
@@ -82,14 +95,6 @@ namespace MovieLibrary
         }
         #endregion
 
-        protected override void OnLoad ( EventArgs e )
-        {
-            base.OnLoad(e);
-
-            new SeedDatabase().SeedIfEmpty(_movies);
-            UpdateUI();
-        }
-
         private void OnMovieAdd ( object sender, EventArgs e )
         {
             MovieForm child = new MovieForm();
@@ -111,22 +116,28 @@ namespace MovieLibrary
             } while (true);
         }
 
+        private Movie GetSelectedMovie ()
+        {
+            return listMovies.SelectedItem as Movie;
+        }
+
         private void UpdateUI ()
         {
             listMovies.Items.Clear();
 
             var movies = _movies.GetAll();
-            foreach (var movie in movies)
-            {
-                listMovies.Items.Add(movie);
-            };
-        }
 
-        
-        
-        private Movie GetSelectedMovie ()
-        {
-            return listMovies.SelectedItem as Movie;
+            // T[] ToArray ( this IEnumerable<T> source ) = returns source as an array
+            // List<T> ToList ( this IEnumerable<T> source ) = returns source as an List<T>
+            //var temp = new List<Movie>();
+            //foreach (var item in _movies)
+            //    temp.Add(item);
+            //return temp;
+            listMovies.Items.AddRange(movies.ToArray());
+            //foreach (var movie in movies)
+            //{
+            //    listMovies.Items.Add(movie);
+            //};
         }
 
         private void OnMovieEdit ( object sender, EventArgs e )
