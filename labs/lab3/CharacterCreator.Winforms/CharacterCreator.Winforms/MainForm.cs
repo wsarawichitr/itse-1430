@@ -29,6 +29,11 @@ namespace CharacterCreator.Winforms
             return result == DialogResult.OK;
         }
 
+        private void DisplayError ( string message )
+        {
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
         private void OnFileExit ( object sender, EventArgs e )
         {
             Close();
@@ -36,23 +41,53 @@ namespace CharacterCreator.Winforms
 
         private void OnCharacterAdd ( object sender, EventArgs e )
         {
-            if (_character != null)
-            {
-                if (!DisplayConfirmation("Overwrite existing character?", ""))
-                    return;
-            }
-
             var child = new CharacterForm();
+
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
 
-            //Save character
-            _character = child.Character;
+            AddCharacter(child.Character);
+            UpdateUI();
+            
+        }
+
+        private void UpdateUI ()
+        {
+            listCharacters.Items.Clear();
+
+            var characters = GetCharacters();
+            foreach (var character in characters)
+            {
+                if (character != null)
+                    listCharacters.Items.Add(character);
+            }
+        }
+
+        private Character[] GetCharacters ()
+        {
+            return _characters;
+        }
+
+        private Character GetSelectedCharacter ()
+        {
+            return listCharacters.SelectedItem as Character;
+        }
+
+        private void AddCharacter ( Character character )
+        {
+            for (var index = 0; index < _characters.Length; ++index)
+            {
+                if (_characters[index] == null)
+                {
+                    _characters[index] = character;
+                    break;
+                }
+            }
         }
 
         private void OnCharacterEdit ( object sender, EventArgs e )
         {
-            var character = _character;
+            var character = GetSelectedCharacter();
             if (character == null)
                 return;
 
@@ -63,19 +98,46 @@ namespace CharacterCreator.Winforms
                 return;
 
             //Save edit
-            _character = child.Character;
+            UpdateCharacter(character, child.Character);
+            UpdateUI();
+        }
+
+        private void UpdateCharacter ( Character oldCharacter, Character newCharacter )
+        {
+            for (var index = 0; index < _characters.Length; ++index)
+            {
+                if (_characters[index] == oldCharacter)
+                {
+                    _characters[index] = newCharacter;
+                    break;
+                };
+            };
         }
 
         private void OnCharacterDelete ( object sender, EventArgs e )
         {
-            var character = _character;
+            var character = GetSelectedCharacter();
             if (character == null)
                 return;
 
             if (!DisplayConfirmation($"Are you sure you want to delete {character.Name}?", "Delete"))
                 return;
-            _character = null;
 
+            DeleteCharacter(character);
+            UpdateUI();
+
+        }
+
+        private void DeleteCharacter ( Character character )
+        {
+            for (var index = 0; index < _characters.Length; ++index)
+            {
+                if (_characters[index] == character)
+                {
+                    _characters[index] = null;
+                    break;
+                };
+            };
         }
 
         private void OnHelpAbout ( object sender, EventArgs e )
@@ -84,9 +146,8 @@ namespace CharacterCreator.Winforms
 
             about.ShowDialog(this);
         }
-
-        private Character _character;
-
+        
+        private Character[] _characters = new Character[100];
         
     }
 }

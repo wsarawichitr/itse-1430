@@ -37,6 +37,7 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listCharacters = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,12 +120,23 @@
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.OnHelpAbout);
             // 
+            // listCharacters
+            // 
+            this.listCharacters.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listCharacters.FormattingEnabled = true;
+            this.listCharacters.ItemHeight = 16;
+            this.listCharacters.Location = new System.Drawing.Point(0, 28);
+            this.listCharacters.Name = "listCharacters";
+            this.listCharacters.Size = new System.Drawing.Size(282, 375);
+            this.listCharacters.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(282, 403);
+            this.Controls.Add(this.listCharacters);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(260, 420);
@@ -150,6 +162,7 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ListBox listCharacters;
     }
 }
 

@@ -19,7 +19,7 @@ namespace CharacterCreator.Winforms
         {
             InitializeComponent();
         }
-
+        
         public Character Character { get; set; }
         
         private void OnSave ( object sender, EventArgs e )
@@ -176,7 +176,7 @@ namespace CharacterCreator.Winforms
             } else
                 _errors.SetError(control, "");
         }
-
+        
 
 
 

@@ -11,14 +11,12 @@ namespace CharacterCreator
 {
     public class Character
     {
+        public int Id { get; set; }
+
         public string Name
         {
-            get {
-                return _name ?? "";
-            }
-            set {
-                _name = value;
-            }
+            get { return _name ?? ""; }
+            set { _name = value?.Trim(); }
         }
         private string _name;
 
@@ -27,14 +25,13 @@ namespace CharacterCreator
         public Race Race { get; set; }
 
         public int[] Attributes { get; set; } = { 50, 50, 50, 50, 50 };
-        //{
-        //    get { return _attributes; }
-        //    set { _attributes = value; }
-        //}
-        //private int[] _attributes = { 50, 50, 50, 50, 50 };
-
+        
         public string Description { get; set; }
 
+        public override string ToString ()
+        {
+            return Name;
+        }
 
     }
 }
