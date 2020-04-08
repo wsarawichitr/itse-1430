@@ -18,13 +18,19 @@ namespace CharacterCreator
 
         public void Delete ( int id )
         {
-            var character = FindById(id);
+            var character = Get(id);
+
             _characters.Remove(character);
         }
 
         public Character Get ( int id )
         {
-            return _characters[id];
+            foreach (var character in _characters)
+            {
+                if (character.Id == id)
+                    return character;
+            }
+            return null;
         }
 
         public IEnumerable<Character> GetAll ()
@@ -36,17 +42,7 @@ namespace CharacterCreator
         {
             return null;
         }
-
-        private Character FindById ( int id )
-        {
-            foreach (var character in _characters)
-            {
-                if (character.Id == id)
-                    return character;
-            };
-
-            return null;
-        }
+        
 
         private readonly List<Character> _characters = new List<Character>();
         private int _id = -1;
