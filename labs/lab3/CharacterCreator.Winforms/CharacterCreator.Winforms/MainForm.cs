@@ -18,6 +18,8 @@ namespace CharacterCreator.Winforms
         public MainForm ()
         {
             InitializeComponent();
+
+            _icharacters = new CharacterRoster();
         }
 
         private bool DisplayConfirmation ( string message, string title )
@@ -46,21 +48,37 @@ namespace CharacterCreator.Winforms
             if (child.ShowDialog(this) != DialogResult.OK)
                 return;
 
-            AddCharacter(child.Character);
+            //AddCharacter(child.Character);
+            var character = _icharacters.Add(child.Character);
             UpdateUI();
             
         }
+
+        //private void AddCharacter ( Character character )
+        //{
+        //    for (var index = 0; index < _characters.Length; ++index)
+        //    {
+        //        if (_characters[index] == null)
+        //        {
+        //            _characters[index] = character;
+        //            break;
+        //        }
+        //    }
+        //}
 
         private void UpdateUI ()
         {
             listCharacters.Items.Clear();
 
-            var characters = GetCharacters();
-            foreach (var character in characters)
-            {
-                if (character != null)
-                    listCharacters.Items.Add(character);
-            }
+            //var characters = GetCharacters();
+            //foreach (var character in characters)
+            //{
+            //    if (character != null)
+            //        listCharacters.Items.Add(character);
+            //}
+
+            var characters = _icharacters.GetAll();
+            listCharacters.Items.AddRange(characters.ToArray());
         }
 
         private Character[] GetCharacters ()
@@ -72,18 +90,7 @@ namespace CharacterCreator.Winforms
         {
             return listCharacters.SelectedItem as Character;
         }
-
-        private void AddCharacter ( Character character )
-        {
-            for (var index = 0; index < _characters.Length; ++index)
-            {
-                if (_characters[index] == null)
-                {
-                    _characters[index] = character;
-                    break;
-                }
-            }
-        }
+        
 
         private void OnCharacterEdit ( object sender, EventArgs e )
         {
@@ -99,6 +106,8 @@ namespace CharacterCreator.Winforms
 
             //Save edit
             UpdateCharacter(character, child.Character);
+
+
             UpdateUI();
         }
 
@@ -120,25 +129,28 @@ namespace CharacterCreator.Winforms
             if (character == null)
                 return;
 
+
+
             if (!DisplayConfirmation($"Are you sure you want to delete {character.Name}?", "Delete"))
                 return;
 
-            DeleteCharacter(character);
+            //DeleteCharacter(character);
+            _icharacters.Delete(character.Id);
             UpdateUI();
 
         }
 
-        private void DeleteCharacter ( Character character )
-        {
-            for (var index = 0; index < _characters.Length; ++index)
-            {
-                if (_characters[index] == character)
-                {
-                    _characters[index] = null;
-                    break;
-                };
-            };
-        }
+        //private void DeleteCharacter ( Character character )
+        //{
+        //    for (var index = 0; index < _characters.Length; ++index)
+        //    {
+        //        if (_characters[index] == character)
+        //        {
+        //            _characters[index] = null;
+        //            break;
+        //        };
+        //    };
+        //}
 
         private void OnHelpAbout ( object sender, EventArgs e )
         {
@@ -148,6 +160,6 @@ namespace CharacterCreator.Winforms
         }
         
         private Character[] _characters = new Character[100];
-        
+        private readonly ICharacterRoster _icharacters;
     }
 }

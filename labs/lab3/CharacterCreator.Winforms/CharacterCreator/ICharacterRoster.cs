@@ -16,6 +16,6 @@ namespace CharacterCreator
 
         IEnumerable<Character> GetAll ();
 
-        void Update ( int id, Character character );
+        string Update ( int id, Character character );
     }
 }
