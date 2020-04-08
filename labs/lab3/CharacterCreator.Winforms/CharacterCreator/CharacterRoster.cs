@@ -40,11 +40,44 @@ namespace CharacterCreator
 
         public string Update ( int id, Character character )
         {
+            if (character == null)
+                return "Movie is null";
+
+            if (id < 0)
+                return "Id is invalid";
+
+            var existing = Get(id);
+            if (existing == null)
+                return "Movie not found";
+
+            // Movie names must be unique
+            var sameName = FindByName(character.Name);
+            if (sameName != null && sameName.Id != id)
+                return "Name must be unique";
+
+            existing.Id = character.Id;
+            existing.Name = character.Name;
+            existing.Profession = character.Profession;
+            existing.Race = character.Race;
+            existing.Attributes = character.Attributes;
+            existing.Description = character.Description;
+
             return null;
         }
-        
+
+        private Character FindByName ( string name )
+        {
+            foreach (var character in _characters)
+            {
+                if (String.Compare(character?.Name, name, true) == 0)
+                    return character;
+            };
+
+            return null;
+        }
+
 
         private readonly List<Character> _characters = new List<Character>();
-        private int _id = -1;
+        private int _id = 0;
     }
 }

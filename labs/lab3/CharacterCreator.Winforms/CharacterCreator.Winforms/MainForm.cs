@@ -101,14 +101,23 @@ namespace CharacterCreator.Winforms
             var child = new CharacterForm();
             child.Character = character;
             child.Text = "Edit Character";
-            if (child.ShowDialog(this) != DialogResult.OK)
-                return;
 
-            //Save edit
-            UpdateCharacter(character, child.Character);
+            do
+            {
+                if (child.ShowDialog(this) != DialogResult.OK)
+                    return;
 
+                //Save edit
+                //UpdateCharacter(character, child.Character);
 
-            UpdateUI();
+                var error = _icharacters.Update(character.Id, child.Character);
+                if (String.IsNullOrEmpty(error))
+                {
+                    UpdateUI();
+                    return;
+                };
+                DisplayError(error);
+            } while (true);
         }
 
         private void UpdateCharacter ( Character oldCharacter, Character newCharacter )
