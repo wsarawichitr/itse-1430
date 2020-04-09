@@ -19,7 +19,7 @@ namespace CharacterCreator.Winforms
         {
             InitializeComponent();
 
-            _icharacters = new CharacterRoster();
+            _characters = new CharacterRoster();
         }
 
         private bool DisplayConfirmation ( string message, string title )
@@ -45,26 +45,26 @@ namespace CharacterCreator.Winforms
         {
             var child = new CharacterForm();
 
-            if (child.ShowDialog(this) != DialogResult.OK)
-                return;
-
-            //AddCharacter(child.Character);
-            var character = _icharacters.Add(child.Character);
-            UpdateUI();
             
-        }
+            do
+            {
+                if (child.ShowDialog(this) != DialogResult.OK)
+                    return;
 
-        //private void AddCharacter ( Character character )
-        //{
-        //    for (var index = 0; index < _characters.Length; ++index)
-        //    {
-        //        if (_characters[index] == null)
-        //        {
-        //            _characters[index] = character;
-        //            break;
-        //        }
-        //    }
-        //}
+                var character = _characters.Add(child.Character);
+                if (character == null)
+                {
+                    DisplayError("Character with the same name already exists");
+                } 
+                else
+                {
+                    UpdateUI();
+                    return;
+                }
+                
+            } while (true);
+
+        }
 
         private void UpdateUI ()
         {
@@ -77,15 +77,10 @@ namespace CharacterCreator.Winforms
             //        listCharacters.Items.Add(character);
             //}
 
-            var characters = _icharacters.GetAll();
+            var characters = _characters.GetAll();
             listCharacters.Items.AddRange(characters.ToArray());
         }
-
-        private Character[] GetCharacters ()
-        {
-            return _characters;
-        }
-
+        
         private Character GetSelectedCharacter ()
         {
             return listCharacters.SelectedItem as Character;
@@ -107,10 +102,7 @@ namespace CharacterCreator.Winforms
                 if (child.ShowDialog(this) != DialogResult.OK)
                     return;
 
-                //Save edit
-                //UpdateCharacter(character, child.Character);
-
-                var error = _icharacters.Update(character.Id, child.Character);
+                var error = _characters.Update(character.Id, child.Character);
                 if (String.IsNullOrEmpty(error))
                 {
                     UpdateUI();
@@ -118,18 +110,6 @@ namespace CharacterCreator.Winforms
                 };
                 DisplayError(error);
             } while (true);
-        }
-
-        private void UpdateCharacter ( Character oldCharacter, Character newCharacter )
-        {
-            for (var index = 0; index < _characters.Length; ++index)
-            {
-                if (_characters[index] == oldCharacter)
-                {
-                    _characters[index] = newCharacter;
-                    break;
-                };
-            };
         }
 
         private void OnCharacterDelete ( object sender, EventArgs e )
@@ -142,24 +122,11 @@ namespace CharacterCreator.Winforms
 
             if (!DisplayConfirmation($"Are you sure you want to delete {character.Name}?", "Delete"))
                 return;
-
-            //DeleteCharacter(character);
-            _icharacters.Delete(character.Id);
+            
+            _characters.Delete(character.Id);
             UpdateUI();
 
         }
-
-        //private void DeleteCharacter ( Character character )
-        //{
-        //    for (var index = 0; index < _characters.Length; ++index)
-        //    {
-        //        if (_characters[index] == character)
-        //        {
-        //            _characters[index] = null;
-        //            break;
-        //        };
-        //    };
-        //}
 
         private void OnHelpAbout ( object sender, EventArgs e )
         {
@@ -168,7 +135,6 @@ namespace CharacterCreator.Winforms
             about.ShowDialog(this);
         }
         
-        private Character[] _characters = new Character[100];
-        private readonly ICharacterRoster _icharacters;
+        private readonly ICharacterRoster _characters;
     }
 }

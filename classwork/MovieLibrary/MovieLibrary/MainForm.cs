@@ -118,14 +118,25 @@ namespace MovieLibrary
 
         private Movie GetSelectedMovie ()
         {
-            return listMovies.SelectedItem as Movie;
+            //Preferred
+            //return listMovies.SelectedItem as Movie;
+
+            //SelectedObjectCollection : IEnumerable
+            var selectedItems = listMovies.SelectedItems;
+            selectedItems.
         }
+
+        private string SortByTitle ( Movie movie ) => movie.Title;
+        private int SortByReleaseYear ( Movie movie ) => movie.ReleaseYear;
 
         private void UpdateUI ()
         {
             listMovies.Items.Clear();
 
-            var movies = _movies.GetAll();
+            var movies = _movies.GetAll()
+                                .OrderBy(SortByTitle)// IEnumberable<T> OrderBy<T> (this IEnumberable<T> source, Func<T, string> sorter );
+                                .ThenByDescending(SortByReleaseYear)
+                                ;
 
             // T[] ToArray ( this IEnumerable<T> source ) = returns source as an array
             // List<T> ToList ( this IEnumerable<T> source ) = returns source as an List<T>
@@ -133,7 +144,7 @@ namespace MovieLibrary
             //foreach (var item in _movies)
             //    temp.Add(item);
             //return temp;
-            listMovies.Items.AddRange(movies.ToArray());
+            listMovies.Items.AddRange(movies.ToArray()); //Enumerable.ToArray(movies)
             //foreach (var movie in movies)
             //{
             //    listMovies.Items.Add(movie);

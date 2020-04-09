@@ -10,7 +10,13 @@ namespace CharacterCreator
     {
         public Character Add ( Character character )
         {
-            character.Id = _id++;
+            character.Id = ++_id;
+            foreach(var item in _characters)
+            {
+                if (item.Name == character.Name)
+                    return null;
+            }
+
             _characters.Add(character);
 
             return character;
@@ -18,6 +24,9 @@ namespace CharacterCreator
 
         public void Delete ( int id )
         {
+            if (id<=0)
+                return;
+
             var character = Get(id);
 
             _characters.Remove(character);
@@ -25,6 +34,9 @@ namespace CharacterCreator
 
         public Character Get ( int id )
         {
+            if (id <= 0)
+                return null;
+
             foreach (var character in _characters)
             {
                 if (character.Id == id)
@@ -35,27 +47,36 @@ namespace CharacterCreator
 
         public IEnumerable<Character> GetAll ()
         {
-            return _characters;
+            foreach (var character in _characters)
+                yield return CopyCharacter(character);
+        }
+
+        private Character CopyCharacter ( Character source )
+        {
+            var copy = new Character();
+            copy.Id = source.Id;
+            copy.Name = source.Name;
+            copy.Profession = source.Profession;
+            copy.Race = source.Race;
+            copy.Attributes = source.Attributes;
+            copy.Description = source.Description;
+
+            return copy;
         }
 
         public string Update ( int id, Character character )
         {
             if (character == null)
-                return "Movie is null";
-
-            if (id < 0)
-                return "Id is invalid";
-
+                return "Character is null";
+            
             var existing = Get(id);
             if (existing == null)
-                return "Movie not found";
-
-            // Movie names must be unique
+                return "Character not found";
+            
             var sameName = FindByName(character.Name);
             if (sameName != null && sameName.Id != id)
                 return "Name must be unique";
-
-            existing.Id = character.Id;
+            
             existing.Name = character.Name;
             existing.Profession = character.Profession;
             existing.Race = character.Race;

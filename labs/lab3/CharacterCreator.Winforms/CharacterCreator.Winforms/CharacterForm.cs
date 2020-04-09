@@ -44,10 +44,16 @@ namespace CharacterCreator.Winforms
             base.OnLoad(e);
 
             //Populate comboboxes
-            var professions = Professions.GetAll();
-            ddlProfessions.Items.AddRange(professions);
-            var races = Races.GetAll();
-            ddlRaces.Items.AddRange(races);
+            if (ddlProfessions.Items.Count == 0)
+            {
+                var professions = Professions.GetAll();
+                ddlProfessions.Items.AddRange(professions);
+            }
+            if (ddlRaces.Items.Count == 0)
+            {
+                var races = Races.GetAll();
+                ddlRaces.Items.AddRange(races);
+            }
             
             txtStrength.Text = "50";
             txtIntelligence.Text = "50";
