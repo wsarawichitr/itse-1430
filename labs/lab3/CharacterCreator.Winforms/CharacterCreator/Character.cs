@@ -1,15 +1,16 @@
 ﻿//William Sarawichitr
 //ITSE-1430
-//2-26-20
+//4-6-20
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace CharacterCreator
 {
-    public class Character
+    public class Character : IValidatableObject
     {
         public int Id { get; set; }
 
@@ -33,5 +34,12 @@ namespace CharacterCreator
             return Name;
         }
 
+        public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
+        {
+            if (String.IsNullOrEmpty(Name))
+            {
+                yield return new ValidationResult("Name is required.", new[] { nameof(Name) });
+            }
+        }
     }
 }

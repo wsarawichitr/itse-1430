@@ -1,6 +1,6 @@
 ﻿//William Sarawichitr
 //ITSE-1430
-//2-26-20
+//4-6-20
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,7 +26,15 @@ namespace CharacterCreator.Winforms
         {
             if (!ValidateChildren())
                 return;
+
             var character = GetCharacter();
+
+            var errors = ObjectValidator.Validate(character);
+            if(errors.Any())
+            {
+                MessageBox.Show("Errors", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 
             Character = character;
             DialogResult = DialogResult.OK;

@@ -1,6 +1,6 @@
 ﻿//William Sarawichitr
 //ITSE-1430
-//2-26-20
+//4-6-20
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +19,7 @@ namespace CharacterCreator.Winforms
         {
             InitializeComponent();
 
-            _characters = new CharacterRoster();
+            _characters = new MemoryCharacterRoster();
         }
 
         private bool DisplayConfirmation ( string message, string title )

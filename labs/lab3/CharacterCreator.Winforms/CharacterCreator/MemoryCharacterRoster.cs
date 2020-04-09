@@ -1,4 +1,7 @@
-﻿using System;
+﻿//William Sarawichitr
+//ITSE-1430
+//4-6-20
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CharacterCreator
 {
-    public class CharacterRoster : ICharacterRoster
+    public class MemoryCharacterRoster : ICharacterRoster
     {
         public Character Add ( Character character )
         {
