@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace MovieLibrary.Business.Memory
@@ -54,22 +55,28 @@ namespace MovieLibrary.Business.Memory
 
         protected override IEnumerable<Movie> GetAllCore ()
         {
-            //return _movies;
-            //TODO: Clone objects
-            //var items = new Movie[_movies.Count];
-            //var index = 0;
+            throw new Exception("Failed");
+
+            //Filtering
+            var items = _movies.Where(m => true);
+
+            //Transforms
+            return _movies.Select(m => CloneMovie(m));
+
+            //items.Any() => true if any elements meet a condition
+            //items.All() => true for all elements
+            //new[] { 1, 2 }.Join()(new[] { 3, 4, });
+            //items.Max(i => i.Id); .Min(); .Sum()
+
+            //Debug.WriteLine("Starting GetAllCore");
+
+            ////use an iterator Luke
             //foreach (var movie in _movies)
             //{
-            //    items[index++] = CloneMovie(movie);
+            //    Debug.WriteLine($"Returning {movie.Id}");
+            //    yield return CloneMovie(movie);
+            //    Debug.WriteLine($"Returned {movie.Id}");
             //};
-
-            //return items;
-
-            //use an iterator Luke
-            foreach (var movie in _movies)
-            {
-                yield return CloneMovie(movie);
-            };
         }
 
         //private sealed class Enumerator<T>  : IEnumerator<T>
@@ -132,27 +139,61 @@ namespace MovieLibrary.Business.Memory
             target.RunLength = source.RunLength;
         }
 
-        protected override Movie FindByTitle ( string title )
+        private IEnumerable<Movie> Query ( string title, int releaseYear )
         {
-            foreach (var movie in _movies)
-            {
-                if (String.Compare(movie?.Title, title, true) == 0)
-                    return movie;
-            };
+            var query = from movie in _movies
+                        select movie;
 
-            return null;
+            if (!String.IsNullOrEmpty(title))
+                query = query.Where(m => String.Compare(m.Title, title, true) == 0);
+
+            if (releaseYear > 0)
+                query = query.Where(m => m.ReleaseYear >= releaseYear);
+
+            return query.ToList();
         }
+        protected override Movie FindByTitle ( string title ) => (from movie in _movies
+                                                                  where String.Compare(movie.Title, title, true) == 0
+                                                                  select movie).FirstOrDefault();
+            // 1. Expression body       => _movies.FirstOrDefault(m => String.Compare(m?.Title, title, true) == 0);
+            // 2. Long way
+        //{
+        //    foreach (var movie in _movies)
+        //    {
+        //        if (String.Compare(movie?.Title, title, true) == 0)
+        //            return movie;
+        //    };
 
-        protected override Movie FindById ( int id )
-        {
-            foreach (var movie in _movies)
-            {
-                if (movie.Id == id)
-                    return movie;
-            };
+        //    return null;
+        //}
 
-            return null;
-        }
+        //private bool _SJDFLKJNOE ( Movie movie ) { return movie.Id == id; }
+
+        //Lambda syntax ::= parameters => body
+        // 0 parameters () => ?    Func<?>
+        // 1 parameter, 1 return type ::=    x => E   ,   _ => E            Func<T, ?>
+        // 2+ parameters  (x,y) => ?                                        Func<S, T, ?>
+        // no return type => {}                                             Action<>
+        // Multiple statment expressions => { S* }
+        //       x => { Console.WriteLine(x); var y = x; return x; }
+        //
+        // General rules around lambdas
+        //   1.\ No ref or out parameters
+        //   2. Closure
+        protected override Movie FindById ( int id ) => _movies.FirstOrDefault(m => m.Id == id);
+        //{
+        //    _movies.FirstOrDefault(m => m.Id == id);
+        //    //var temp = new DummyType()  { Id = id };
+        //    //_movies.FirstOrDefault(temp._SHJHDJ);
+
+        //    foreach (var movie in _movies)
+        //    {
+        //        if (movie.Id == id)
+        //            return movie;
+        //    };
+
+        //    return null;
+        //}
 
         //private readonly Movie[] _movies = new Movie[100];
         private readonly List<Movie> _movies = new List<Movie>();

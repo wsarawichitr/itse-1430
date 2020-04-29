@@ -10,21 +10,16 @@ namespace MovieLibrary.Business
     {
         public Movie Add ( Movie movie )
         {
-            //TODO: Validate
             if (movie == null)
-                return null;
-
-            //.NET Validation
-            var errors = ObjectValidator.Validate(movie);
-            if (errors.Any())
-            //if (!Validator.TryValidateObject(movie, new ValidationContext(movie), errors, true))
-            //if (!movie.Validate(out var error))
-                return null;
+                throw new ArgumentNullException(nameof(movie), "Movie is null");
+                //return null;
+                
+            ObjectValidator.Validate(movie);
 
             //TODO: Movie names must be unique
             var existing = FindByTitle(movie.Title);
             if (existing != null)
-                return null;
+                throw new InvalidOperationException("Movie must be unique");
 
             return AddCore(movie);
         }
@@ -33,9 +28,8 @@ namespace MovieLibrary.Business
 
         public void Delete ( int id )
         {
-            //TODO: Validate
             if (id<=0)
-                return;
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be greater than zero");
 
             DeleteCore(id);
         }
@@ -44,9 +38,8 @@ namespace MovieLibrary.Business
 
         public Movie Get ( int id )
         {
-            //TODO: Error
             if (id <= 0)
-                return null;
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be greater than zero");
 
             return GetCore(id);
         }
@@ -69,26 +62,27 @@ namespace MovieLibrary.Business
 
         public string Update ( int id, Movie movie )
         {
-            //TODO: Validate
+            //if (movie == null)
+            //    return "Movie is null";
             if (movie == null)
-                return "Movie is null";
+                throw new ArgumentNullException(nameof(movie), "Movie is null");
 
-            var errors = ObjectValidator.Validate(movie);
-            if (errors.Any())
-                //if (!movie.Validate(out var error))
-                return "Error";
+            ObjectValidator.Validate(movie);
 
             if (id <= 0)
-                return "Id is invalid";
+                throw new ArgumentOutOfRangeException(nameof(id), "Id must be greater than zero");
+                //return "Id is invalid";
 
             var existing = FindById(id);
             if (existing == null)
-                return "Movie not found";
+                throw new ArgumentException("Movie not found", nameof(id));
+                //return "Movie not found";
 
             // Movie names must be unique
             var sameName = FindByTitle(movie.Title);
             if (sameName != null && sameName.Id != id)
-                return "Movie must be unique";
+                throw new InvalidOperationException("Movie must be unique");
+                //return "Movie must be unique";
 
             UpdateCore(id, movie);
 
