@@ -3,6 +3,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Nile.Stores
 {
@@ -89,6 +90,10 @@ namespace Nile.Stores
 
             return null;
         }
+
+        protected override Product FindByName ( string name ) => (from product in _products
+                                                                  where String.Compare(product.Name, name, true) == 0
+                                                                  select product).FirstOrDefault();
 
         private List<Product> _products = new List<Product>();
         private int _nextId = 1;

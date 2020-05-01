@@ -24,6 +24,10 @@ namespace Nile.Stores
             ObjectValidator.Validate(product);
 
             //Emulate database by storing copy
+            var existing = FindByName(product.Name);
+            if (existing != null)
+                throw new InvalidOperationException("Name must be unique");
+            
             return AddCore(product);
         }
 
@@ -75,6 +79,10 @@ namespace Nile.Stores
             //Get existing product
             var existing = GetCore(product.Id);
 
+            var sameName = FindByName(product.Name);
+            if (sameName != null && sameName.Id != product.Id)
+                throw new InvalidOperationException("Product must be unique");
+
             return UpdateCore(existing, product);
         }
 
@@ -89,6 +97,9 @@ namespace Nile.Stores
         protected abstract Product UpdateCore( Product existing, Product newItem );
 
         protected abstract Product AddCore( Product product );
+
+        protected abstract Product FindByName ( string title );
+        
         #endregion
     }
 }
