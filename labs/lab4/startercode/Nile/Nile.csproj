@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IProductDatabase.cs" />
+    <Compile Include="ObjectValidator.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Stores\ProductDatabase.cs" />
     <Compile Include="Stores\MemoryProductDatabase.cs" />

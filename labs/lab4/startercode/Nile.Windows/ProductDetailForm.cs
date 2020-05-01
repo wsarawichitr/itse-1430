@@ -3,6 +3,7 @@
  */
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Nile.Windows
@@ -70,6 +71,12 @@ namespace Nile.Windows
             };
 
             //TODO: Validate product
+            var errors = ObjectValidator.TryValidate(product);
+            if (errors.Any())
+            {
+                MessageBox.Show("Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             Product = product;
             DialogResult = DialogResult.OK;
@@ -107,7 +114,12 @@ namespace Nile.Windows
 
             //Validate price            
             return -1;
-        }                      
+        }
+
+        private void DisplayError ( string message )
+        {
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         #endregion
     }
 }
