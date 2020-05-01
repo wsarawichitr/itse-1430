@@ -93,6 +93,13 @@ namespace Nile.Windows
             e.SuppressKeyPress = true;
         }
 
+        private void OnHelpAbout ( object sender, EventArgs e )
+        {
+            var about = new AboutBox();
+
+            about.ShowDialog(this);
+        }
+
         #endregion
 
         #region Private Members
