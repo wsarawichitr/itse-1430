@@ -74,7 +74,6 @@ namespace Nile.Windows
             var errors = ObjectValidator.TryValidate(product);
             if (errors.Any())
             {
-                MessageBox.Show("Error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

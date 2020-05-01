@@ -40,8 +40,14 @@ namespace Nile.Windows
 
             //TODO: Handle errors
             //Save product
-            _database.Add(child.Product);
-            UpdateList();
+            try
+            {
+                _database.Add(child.Product);
+                UpdateList();
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            };
         }
 
         private void OnProductEdit( object sender, EventArgs e )
@@ -113,8 +119,14 @@ namespace Nile.Windows
 
             //TODO: Handle errors
             //Delete product
-            _database.Remove(product.Id);
-            UpdateList();
+            try
+            {
+                _database.Remove(product.Id);
+                UpdateList();
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            };
         }
 
         private void EditProduct ( Product product )
@@ -126,8 +138,14 @@ namespace Nile.Windows
 
             //TODO: Handle errors
             //Save product
-            _database.Update(child.Product);
-            UpdateList();
+            try
+            {
+                _database.Update(child.Product);
+                UpdateList();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            };
         }
 
         private Product GetSelectedProduct ()
@@ -141,8 +159,13 @@ namespace Nile.Windows
         private void UpdateList ()
         {
             //TODO: Handle errors
-
-            _bsProducts.DataSource = _database.GetAll();
+            try
+            {
+                _bsProducts.DataSource = _database.GetAll();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();

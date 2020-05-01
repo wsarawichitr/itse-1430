@@ -47,8 +47,6 @@ namespace Nile
             {
                 yield return new ValidationResult("Name is required.", new[] { nameof(Name) });
             }
-
-            //return Enumerable.Empty<ValidationResult>();
         }
 
         #region Private Members
