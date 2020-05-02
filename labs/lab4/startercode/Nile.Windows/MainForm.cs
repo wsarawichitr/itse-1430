@@ -4,8 +4,10 @@
  * 4-29-20
  */
 using System;
+using System.Configuration;
 using System.Linq;
 using System.Windows.Forms;
+using Nile.Stores.Sql;
 
 namespace Nile.Windows
 {
@@ -24,6 +26,8 @@ namespace Nile.Windows
             base.OnLoad(e);
 
             _gridProducts.AutoGenerateColumns = false;
+            
+            var connString = ConfigurationManager.ConnectionStrings["ProductDatabase"];
 
             UpdateList();
         }
