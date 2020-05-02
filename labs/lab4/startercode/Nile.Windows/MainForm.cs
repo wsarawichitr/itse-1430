@@ -4,6 +4,7 @@
  * 4-29-20
  */
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Nile.Windows
@@ -161,13 +162,20 @@ namespace Nile.Windows
         private void UpdateList ()
         {
             //TODO: Handle errors
+            var products = Enumerable.Empty<Product>();
             try
             {
-                _bsProducts.DataSource = _database.GetAll();
+                products = _database.GetAll();
             }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            products = from product in products
+                       orderby product.Name ascending
+                       select product;
+
+            _bsProducts.DataSource = products;
         }
 
         private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
